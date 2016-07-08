@@ -1,7 +1,4 @@
-class PokemonsController < ApplicationController
-# 	SELECT pokemons.id, pokemon_species_names.name FROM pokemons 
-# inner join pokemon_species_names on pokemon_species_names.pokemon_species_id = pokemons.species_id
-# where pokemon_species_names.local_language_id = 9
+class API::V1::PokemonsController < ApplicationController
 	def index
 		pokemons 	= Pokemon.all
 		language 	= 9
@@ -24,7 +21,6 @@ class PokemonsController < ApplicationController
 		respond_to do |format|
 		  format.html # show.html.erb
 		  format.json { render json: p }
-
 		end
 	end
 end
