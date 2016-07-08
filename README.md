@@ -1,7 +1,5 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Rails pokédex
+API de Pokedex para buscar a pokémons en base a su nombre o número, hecha con ruby on rails, en construcción
 
 Things you may want to cover:
 
