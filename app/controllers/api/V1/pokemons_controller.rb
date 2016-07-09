@@ -1,13 +1,13 @@
 class API::V1::PokemonsController < ApplicationController
+
 	def index
-		pokemons 	= Pokemon.all
 		language 	= 9
-		@p = pokemons.select("pokemons.id, pokemon_species_names.name")
+		p = Pokemon.all.select("pokemons.id, pokemon_species_names.name")
 					.joins(:pokemon_species_name)
 					.where("pokemon_species_names.local_language_id = #{language}")
 		respond_to do |format|
-		  format.html # index.html.erb
-		  format.json { render json: @p }
+		  format.html
+		  format.json { render json: p }
 		end
 	end
 
@@ -19,7 +19,7 @@ class API::V1::PokemonsController < ApplicationController
 					.where("pokemon_species_names.local_language_id = #{language}")
 					.where("pokemons.id = #{pokemon_id}").first
 		respond_to do |format|
-		  format.html # show.html.erb
+		  format.html
 		  format.json { render json: p }
 		end
 	end

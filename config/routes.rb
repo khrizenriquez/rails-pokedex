@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 	#root :to => 'pokemons#index'
 
-	namespace :api, defaults: {format: :json} do
+	namespace :api, defaults: {format: 'json'} do
 		namespace :v1 do
 			resources :pokemons, only: [:index, :show]
 		end
