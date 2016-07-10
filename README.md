@@ -1,7 +1,9 @@
 # Rails pokédex
 API de Pokedex para buscar a pokémons en base a su nombre o número, hecha con ruby on rails, en construcción.
 
-Información de pokémons: https://github.com/ceejaay/pokedex/blob/master/db/pokedex.csv
+Información de pokémons [fue posible gracias al csv de ceejaay](https://github.com/ceejaay/pokedex/blob/master/db/pokedex.csv)
+
+Assets de las imágenes [Gracias a Veekum.com](http://veekun.com/dex/downloads)
 
 Things you may want to cover:
 
