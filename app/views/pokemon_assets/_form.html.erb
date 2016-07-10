@@ -1,0 +1,27 @@
+<%= form_for(pokemon_asset) do |f| %>
+  <% if pokemon_asset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pokemon_asset.errors.count, "error") %> prohibited this pokemon_asset from being saved:</h2>
+
+      <ul>
+      <% pokemon_asset.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pokemon_id %>
+    <%= f.number_field :pokemon_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type_id %>
+    <%= f.number_field :type_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

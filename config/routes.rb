@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :types
 	#root :to => 'pokemons#index'
 
 	namespace :api, defaults: {format: 'json'} do

@@ -1,0 +1,2 @@
+class PokemonAsset < ApplicationRecord
+end
