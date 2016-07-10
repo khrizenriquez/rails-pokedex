@@ -9,13 +9,14 @@ class API::V1::PokemonsController < ApplicationController
 	end
 
 	def show
-		poke_param 	= number_or_nil(params[:id])
+		poke_param 	= params[:id]
 
 		if poke_param == nil
 			poke_param = 1
 		end
 
-		p = Pokemon.find(poke_param)
+		p = Pokemon.where(nat: poke_param).first
+		#.where("nat = #{poke_param}").first
 		respond_to do |format|
 		  format.html
 		  format.json { render json: p }
