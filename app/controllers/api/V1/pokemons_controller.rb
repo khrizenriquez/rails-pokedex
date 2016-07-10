@@ -16,7 +16,6 @@ class API::V1::PokemonsController < ApplicationController
 		end
 
 		p = Pokemon.where(nat: poke_param).first
-		#.where("nat = #{poke_param}").first
 		respond_to do |format|
 		  format.html
 		  format.json { render json: p }
