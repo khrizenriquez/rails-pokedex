@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# types
+Type.create([
+	{name: 'ico'}, 
+	{name: 'cries'}, 
+	{name: 'image-svg'}, 
+	{name: 'image-png'}
+])

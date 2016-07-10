@@ -16,9 +16,20 @@ class API::V1::PokemonsController < ApplicationController
 		end
 
 		p = Pokemon.where(nat: poke_param).first
+		tmpPokemon = []
+
+		tmpPokemon << { :png_image => "png" }
+
+		# Adding images positions
+		#item <<{ :status => "Success" }
+
+		#p << { :png_image => "png" }
+		#p << { :ico_image => "ico" }
+
+		# Adding sound position
 		respond_to do |format|
 		  format.html
-		  format.json { render json: p }
+		  format.json { render json: tmpPokemon }
 		end
 	end
 
