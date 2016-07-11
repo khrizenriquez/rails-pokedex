@@ -2,13 +2,22 @@ class API::V1::PokemonAssetsController < ApplicationController
 
   #only call once
   def fill_data_cries 
-    base = Dir[Rails.application.config.assets_base_path.join('pokemons-cries', '*')]
+    file_name = 'pokemons-cries'
+    base      = Dir[Rails.application.config.assets_base_path.join(file_name, '*')]
+    relative  = Rails.application.config.assets_relative_path.join(file_name)
 
     tmp = []
     base.each do |element|
-      pokemon_id = element.scan(/\d+/)[1] 
+      pokemon_id    = element.scan(/\d+/)[1] 
+      element_name  = element.split('/').last
+
       if pokemon_id != nil
-        tmp << {:pokemon_id => pokemon_id, :type_id => 2}
+        # /media/pokemons/v1/:file_name/:element_name
+        tmp << {
+                :pokemon_id => pokemon_id, 
+                :type_id    => 2, 
+                :slug       => relative.join(element_name)
+        }
       end
     end
 
@@ -17,13 +26,20 @@ class API::V1::PokemonAssetsController < ApplicationController
 
   #only call once
   def fill_data_ico 
-    base = Dir[Rails.application.config.assets_base_path.join('pokemons-ico', 'overworld', '*')]
+    file_name = 'pokemons-ico'
+    base      = Dir[Rails.application.config.assets_base_path.join(file_name, 'overworld', '*')]
+    relative  = Rails.application.config.assets_relative_path.join(file_name)
 
     tmp = []
     base.each do |element|
-      pokemon_id = element.scan(/\d+/)[1] 
+      pokemon_id    = element.scan(/\d+/)[1] 
+      element_name  = element.split('/').last
       if pokemon_id != nil
-        tmp << {:pokemon_id => pokemon_id, :type_id => 1}
+        tmp << {
+                :pokemon_id => pokemon_id, 
+                :type_id    => 1, 
+                :slug       => relative.join(element_name)
+        }
       end
     end
 
@@ -32,13 +48,20 @@ class API::V1::PokemonAssetsController < ApplicationController
 
   #only call once
   def fill_data_svg 
-    base = Dir[Rails.application.config.assets_base_path.join('pokemons-svg', '*')]
+    file_name = 'pokemons-svg'
+    base      = Dir[Rails.application.config.assets_base_path.join(file_name, '*')]
+    relative  = Rails.application.config.assets_relative_path.join(file_name)
 
     tmp = []
     base.each do |element|
-      pokemon_id = element.scan(/\d+/)[1] 
+      pokemon_id    = element.scan(/\d+/)[1] 
+      element_name  = element.split('/').last
       if pokemon_id != nil
-        tmp << {:pokemon_id => pokemon_id, :type_id => 3}
+        tmp << {
+                :pokemon_id => pokemon_id, 
+                :type_id    => 3, 
+                :slug       => relative.join(element_name)
+        }
       end
     end
 
@@ -47,13 +70,20 @@ class API::V1::PokemonAssetsController < ApplicationController
 
   #only call once
   def fill_data_img 
-    base = Dir[Rails.application.config.assets_base_path.join('pokemons-art-sugimori', '*')]
+    file_name = 'pokemons-art-sugimori'
+    base      = Dir[Rails.application.config.assets_base_path.join(file_name, '*')]
+    relative  = Rails.application.config.assets_relative_path.join(file_name)
 
     tmp = []
     base.each do |element|
-      pokemon_id = element.scan(/\d+/)[1] 
+      pokemon_id    = element.scan(/\d+/)[1] 
+      element_name  = element.split('/').last
       if pokemon_id != nil
-        tmp << {:pokemon_id => pokemon_id, :type_id => 4}
+        tmp << {
+                :pokemon_id => pokemon_id, 
+                :type_id    => 4, 
+                :slug       => relative.join(element_name)
+        }
       end
     end
 
