@@ -15,13 +15,49 @@ class API::V1::PokemonsController < ApplicationController
 			poke_param = 1
 		end
 
-		p = Pokemon.where(nat: poke_param).first
+		p = Pokemon.select("pokemons.nat, pokemons.name, pokemons.hp, pokemons.atk, 
+							pokemons.def, 
+							group_concat(pokemon_assets.slug) slug")
+			.joins(:pokemon_asset)
+			.where(nat: poke_param)
+			.first
 
+		r = Hash.new
+		r[:pokedex_national] 	= p.nat
+		r[:name] 		= p.name
+		r[:hp] 			= p.hp
+		r[:atk] 		= p.atk
+		r[:def] 		= p.def
+		r[:assets] 		= {}
+
+		ico 	= []
+		svg 	= []
+		png 	= []
+		sound 	= []
+		p.slug.split(',').each do |element| 
+			if element.index('pokemons-ico')
+				ico.push(element)
+			end
+			if element.index('pokemons-svg')
+				svg.push(element)
+			end
+			if element.index('pokemons-art-sugimori')
+				png.push(element)
+			end
+			if element.index('pokemons-cries')
+				sound.push(element)
+			end
+		end
+
+		r[:assets][:ico] 	= ico
+		r[:assets][:sounds] = sound
+		r[:assets][:svg] 	= svg
+		r[:assets][:png] 	= png
 
 		# Adding sound position
 		respond_to do |format|
 		  format.html
-		  format.json { render json: p }
+		  format.json { render json: r }
 		end
 	end
 

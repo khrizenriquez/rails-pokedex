@@ -27,8 +27,8 @@ class API::V1::PokemonAssetsController < ApplicationController
   #only call once
   def fill_data_ico 
     file_name = 'pokemons-ico'
-    base      = Dir[Rails.application.config.assets_base_path.join(file_name, 'overworld', '*')]
-    relative  = Rails.application.config.assets_relative_path.join(file_name)
+    base      = Dir[Rails.application.config.assets_base_path.join(file_name, 'overworld', 'down', '*')]
+    relative  = Rails.application.config.assets_relative_path.join(file_name, 'overworld', 'down')
 
     tmp = []
     base.each do |element|
