@@ -5,8 +5,8 @@ class API::V1::PokemonsController < ApplicationController
 					.select("pokemons.nat, pokemons.name, pokemons.hp, pokemons.atk, 
 							pokemons.def, 
 							group_concat(pokemon_assets.slug) slug")
-					.joins(:pokemon_asset)
-					.group("pokemons.id")
+					.joins("INNER JOIN pokemon_assets on pokemon_assets.pokemon_id = pokemons.nat")
+					.group("pokemons.nat")
 
 		arr = []
 
@@ -63,9 +63,9 @@ class API::V1::PokemonsController < ApplicationController
 		p = Pokemon.select("pokemons.nat, pokemons.name, pokemons.hp, pokemons.atk, 
 							pokemons.def, 
 							group_concat(pokemon_assets.slug) slug")
-			.joins(:pokemon_asset)
+			.joins("INNER JOIN pokemon_assets on pokemon_assets.pokemon_id = pokemons.nat")
 			.where(nat: poke_param)
-			.group("pokemons.id")
+			.group("pokemons.nat")
 			.first
 
 		r = Hash.new
