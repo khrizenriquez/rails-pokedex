@@ -9,6 +9,7 @@ class API::V1::PokemonsController < ApplicationController
 	end
 
 	def show
+		puts request.env["HTTP_HOST"]
 		poke_param 	= params[:id]
 
 		if poke_param == nil
@@ -35,17 +36,18 @@ class API::V1::PokemonsController < ApplicationController
 		png 	= []
 		sound 	= []
 		p.slug.split(',').each do |element| 
+			element_path = Pathname.new("#{request.env["HTTP_HOST"]}/#{element}")
 			if element.index('pokemons-ico')
-				ico.push(element)
+				ico.push(element_path)
 			end
 			if element.index('pokemons-svg')
-				svg.push(element)
+				svg.push(element_path)
 			end
 			if element.index('pokemons-art-sugimori')
-				png.push(element)
+				png.push(element_path)
 			end
 			if element.index('pokemons-cries')
-				sound.push(element)
+				sound.push(element_path)
 			end
 		end
 
