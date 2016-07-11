@@ -12,13 +12,12 @@ class API::V1::PokemonsController < ApplicationController
 
 		p.each do |element| 
 			r = Hash.new
-			puts element.name
 			r["pokedex_national"] 	= element.nat
 			r["name"] 		= element.name
-			r["hp"] 			= element.hp
+			r["hp"] 		= element.hp
 			r["atk"] 		= element.atk
 			r["def"] 		= element.def
-			r["assets"] 		= {}
+			r["assets"] 	= {}
 
 			ico 	= []
 			svg 	= []
@@ -55,7 +54,6 @@ class API::V1::PokemonsController < ApplicationController
 	end
 
 	def show
-		puts request.env["HTTP_HOST"]
 		poke_param 	= params[:id]
 
 		if poke_param == nil
