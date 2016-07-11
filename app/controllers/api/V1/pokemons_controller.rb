@@ -2,9 +2,55 @@ class API::V1::PokemonsController < ApplicationController
 
 	def index
 		p = Pokemon.all
+					.select("pokemons.nat, pokemons.name, pokemons.hp, pokemons.atk, 
+							pokemons.def, 
+							group_concat(pokemon_assets.slug) slug")
+					.joins(:pokemon_asset)
+					.group("pokemons.id")
+
+		arr = []
+
+		p.each do |element| 
+			r = Hash.new
+			puts element.name
+			r["pokedex_national"] 	= element.nat
+			r["name"] 		= element.name
+			r["hp"] 			= element.hp
+			r["atk"] 		= element.atk
+			r["def"] 		= element.def
+			r["assets"] 		= {}
+
+			ico 	= []
+			svg 	= []
+			png 	= []
+			sound 	= []
+			element.slug.split(',').each do |ele| 
+				element_path = Pathname.new("#{request.env["HTTP_HOST"]}/#{ele}")
+				if ele.index('pokemons-ico')
+					ico.push(element_path)
+				end
+				if ele.index('pokemons-svg')
+					svg.push(element_path)
+				end
+				if ele.index('pokemons-art-sugimori')
+					png.push(element_path)
+				end
+				if ele.index('pokemons-cries')
+					sound.push(element_path)
+				end
+			end
+
+			r["assets"]["ico"] 	= ico
+			r["assets"]["sounds"] = sound
+			r["assets"]["svg"] 	= svg
+			r["assets"]["png"] 	= png
+
+			arr << r
+		end
+
 		respond_to do |format|
 		  format.html
-		  format.json { render json: p }
+		  format.json { render json: arr }
 		end
 	end
 
@@ -21,6 +67,7 @@ class API::V1::PokemonsController < ApplicationController
 							group_concat(pokemon_assets.slug) slug")
 			.joins(:pokemon_asset)
 			.where(nat: poke_param)
+			.group("pokemons.id")
 			.first
 
 		r = Hash.new
